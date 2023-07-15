@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "wordpress_site" {
+/* resource "aws_acm_certificate" "wordpress_site" {
   domain_name       = var.site_domain
   validation_method = "DNS"
 
@@ -31,4 +31,4 @@ resource "aws_acm_certificate_validation" "wordpress_site" {
   provider                = aws.ue1
   certificate_arn         = aws_acm_certificate.wordpress_site.arn
   validation_record_fqdns = [for record in aws_route53_record.wordpress_acm_validation : record.fqdn]
-}
+}*/
