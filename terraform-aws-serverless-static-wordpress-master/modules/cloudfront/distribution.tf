@@ -2,7 +2,7 @@
 # TODO: Add optional versioning for S3 bucket
 #tfsec:ignore:AWS002 #tfsec:ignore:AWS077
 resource "aws_s3_bucket" "wordpress_bucket" {
-  bucket        = "${var.site_prefix}.${var.site_domain}"
+  bucket        = "${var.site_prefix}.letdothework"
   force_destroy = true
   server_side_encryption_configuration {
     rule {
@@ -80,7 +80,7 @@ resource "aws_cloudfront_distribution" "wordpress_distribution" {
 
   viewer_certificate {
     minimum_protocol_version = "TLSv1.2_2019"
-    acm_certificate_arn      = var.cloudfront_ssl
+   # acm_certificate_arn      = var.cloudfront_ssl
     ssl_support_method       = "sni-only"
 
   }
