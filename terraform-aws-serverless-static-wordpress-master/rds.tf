@@ -5,7 +5,7 @@ resource "random_password" "serverless_wordpress_password" {
 }
 
 resource "aws_security_group" "aurora_serverless_group" {
-  name        = "${var.site_domain}_aurora_mysql_sg"
+  name        = "${var.site_name}_aurora_mysql_sg"
   description = "security group for serverless wordpress mysql aurora"
   vpc_id      = var.main_vpc_id
 }
@@ -25,7 +25,7 @@ resource "aws_db_subnet_group" "main_vpc" {
   subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "${var.site_domain} Subnet group for main VPC"
+    Name = "${var.site_name} Subnet group for main VPC"
   }
 }
 
