@@ -128,11 +128,11 @@ variable "wordpress_admin_password" {
   sensitive = true
 }
 
-# variable "wordpress_admin_email" {
-#   type        = string
-#   description = "The email address of the default wordpress admin user."
-#   default     = "admin@example.com"
-# }
+variable "wordpress_admin_email" {
+   type        = string
+   description = "The email address of the default wordpress admin user."
+   default     = "admin@example.com"
+ }
 
 # variable "waf_acl_rules" {
 #   type        = list(any)
