@@ -1,7 +1,7 @@
-variable "site_domain" {
-  type        = string
-  description = "The site domain name to configure (without any subdomains such as 'www')"
-}
+# variable "site_domain" {
+#   type        = string
+#   description = "The site domain name to configure (without any subdomains such as 'www')"
+# }
 
 variable "site_prefix" {
   type        = string
@@ -9,10 +9,10 @@ variable "site_prefix" {
   default     = "www"
 }
 
-variable "cloudfront_ssl" {
-  type        = string
-  description = "The ARN of the ACM certificate used for the CloudFront domain."
-}
+# variable "cloudfront_ssl" {
+#   type        = string
+#   description = "The ARN of the ACM certificate used for the CloudFront domain."
+# }
 
 variable "site_name" {
   type        = string
@@ -31,8 +31,8 @@ variable "cloudfront_class" {
   default     = "PriceClass_All"
 }
 
-variable "waf_acl_arn" {
-  type        = string
-  default     = null
-  description = "The ARN of the WAF ACL applied to the CloudFront distribution."
-}
+# variable "waf_acl_arn" {
+#   type        = string
+#   default     = null
+#   description = "The ARN of the WAF ACL applied to the CloudFront distribution."
+# }
