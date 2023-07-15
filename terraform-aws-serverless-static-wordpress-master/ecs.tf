@@ -35,11 +35,11 @@ data "aws_iam_policy_document" "wordpress_bucket_access" {
     effect    = "Allow"
     resources = ["*"]
   }
-  statement {
-    actions   = ["route53:ChangeResourceRecordSets"]
-    effect    = "Allow"
-    resources = ["arn:aws:route53:::hostedzone/${var.hosted_zone_id}"]
-  }
+  # statement {
+  #   actions   = ["route53:ChangeResourceRecordSets"]
+  #   effect    = "Allow"
+  #   resources = ["arn:aws:route53:::hostedzone/${var.hosted_zone_id}"]
+  # }
 }
 
 resource "aws_iam_policy" "wordpress_bucket_access" {
@@ -109,17 +109,17 @@ resource "aws_ecs_task_definition" "wordpress_container" {
     db_password              = random_password.serverless_wordpress_password.result,
     db_name                  = aws_rds_cluster.serverless_wordpress.database_name,
     wordpress_image          = "${aws_ecr_repository.serverless_wordpress.repository_url}:latest",
-    wp_dest                  = "https://${var.site_prefix}.${var.site_domain}",
+    wp_dest                  = "https://${var.site_prefix}.$public_ip",
     wp_region                = var.s3_region,
     wp_bucket                = module.cloudfront.wordpress_bucket_id,
-    container_dns            = "${var.wordpress_subdomain}.${var.site_domain}",
-    container_dns_zone       = var.hosted_zone_id,
+    # container_dns            = "${var.wordpress_subdomain}.${var.site_domain}",
+    # container_dns_zone       = var.hosted_zone_id,
     container_cpu            = var.ecs_cpu,
     container_memory         = var.ecs_memory
     efs_source_volume        = "${var.site_name}_wordpress_persistent"
     wordpress_admin_user     = var.wordpress_admin_user
     wordpress_admin_password = var.wordpress_admin_password
-    wordpress_admin_email    = var.wordpress_admin_email
+    wordpress_admin_email    = yobitelcommunication@gmail.com
     site_name                = var.site_name
   })
 
