@@ -1,4 +1,4 @@
-resource "aws_route53_record" "www" {
+/*resource "aws_route53_record" "www" {
   zone_id = var.hosted_zone_id
   name    = "www"
   type    = "CNAME"
@@ -15,4 +15,4 @@ resource "aws_route53_record" "apex" {
     zone_id                = module.cloudfront.wordpress_cloudfront_distrubtion_hostedzone_id
     evaluate_target_health = false
   }
-}
+}*/
