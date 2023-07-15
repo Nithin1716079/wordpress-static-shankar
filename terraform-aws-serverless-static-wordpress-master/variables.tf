@@ -15,12 +15,13 @@ variable "subnet_ids" {
 variable "aws_account_id" {
   type        = string
   description = "The AWS account ID into which resources will be launched."
+  default = "059449770494"
 }
 
-variable "site_domain" {
-  type        = string
-  description = "The site domain name to configure (without any subdomains such as 'www')"
-}
+# variable "site_domain" {
+#   type        = string
+#   description = "The site domain name to configure (without any subdomains such as 'www')"
+# }
 
 variable "site_name" {
   type        = string
@@ -97,15 +98,15 @@ variable "cloudfront_class" {
   default     = "PriceClass_All"
 }
 
-variable "hosted_zone_id" {
-  type        = string
-  description = "The Route53 HostedZone ID to use to create records in."
-}
+# variable "hosted_zone_id" {
+#   type        = string
+#   description = "The Route53 HostedZone ID to use to create records in."
+# }
 
-variable "waf_enabled" {
-  type        = bool
-  description = "Flag to enable default WAF configuration in front of CloudFront."
-}
+# variable "waf_enabled" {
+#   type        = bool
+#   description = "Flag to enable default WAF configuration in front of CloudFront."
+# }
 
 variable "wordpress_subdomain" {
   type        = string
@@ -116,53 +117,53 @@ variable "wordpress_subdomain" {
 variable "wordpress_admin_user" {
   type        = string
   description = "The username of the default wordpress admin user."
-  default     = "supervisor"
+  default     = "admin"
 }
 
 variable "wordpress_admin_password" {
   type        = string
   description = "The password of the default wordpress admin user."
   #tfsec:ignore:GEN001
-  default   = "techtospeech.com"
+  default   = "yobitel"
   sensitive = true
 }
 
-variable "wordpress_admin_email" {
-  type        = string
-  description = "The email address of the default wordpress admin user."
-  default     = "admin@example.com"
-}
+# variable "wordpress_admin_email" {
+#   type        = string
+#   description = "The email address of the default wordpress admin user."
+#   default     = "admin@example.com"
+# }
 
-variable "waf_acl_rules" {
-  type        = list(any)
-  description = "List of WAF rules to apply. Can be customized to apply others created outside of module."
-  default = [
-    {
-      name                       = "AWS-AWSManagedRulesAmazonIpReputationList"
-      priority                   = 0
-      managed_rule_group_name    = "AWSManagedRulesAmazonIpReputationList"
-      vendor_name                = "AWS"
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWS-AWSManagedRulesAmazonIpReputationList"
-      sampled_requests_enabled   = true
-    },
-    {
-      name                       = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
-      priority                   = 1
-      managed_rule_group_name    = "AWSManagedRulesKnownBadInputsRuleSet"
-      vendor_name                = "AWS"
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
-      sampled_requests_enabled   = true
-    },
-    {
-      name                       = "AWS-AWSManagedRulesBotControlRuleSet"
-      priority                   = 2
-      managed_rule_group_name    = "AWSManagedRulesBotControlRuleSet"
-      vendor_name                = "AWS"
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWS-AWSManagedRulesBotControlRuleSet"
-      sampled_requests_enabled   = true
-    }
-  ]
-}
+# variable "waf_acl_rules" {
+#   type        = list(any)
+#   description = "List of WAF rules to apply. Can be customized to apply others created outside of module."
+#   default = [
+#     {
+#       name                       = "AWS-AWSManagedRulesAmazonIpReputationList"
+#       priority                   = 0
+#       managed_rule_group_name    = "AWSManagedRulesAmazonIpReputationList"
+#       vendor_name                = "AWS"
+#       cloudwatch_metrics_enabled = true
+#       metric_name                = "AWS-AWSManagedRulesAmazonIpReputationList"
+#       sampled_requests_enabled   = true
+#     },
+#     {
+#       name                       = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
+#       priority                   = 1
+#       managed_rule_group_name    = "AWSManagedRulesKnownBadInputsRuleSet"
+#       vendor_name                = "AWS"
+#       cloudwatch_metrics_enabled = true
+#       metric_name                = "AWS-AWSManagedRulesKnownBadInputsRuleSet"
+#       sampled_requests_enabled   = true
+#     },
+#     {
+#       name                       = "AWS-AWSManagedRulesBotControlRuleSet"
+#       priority                   = 2
+#       managed_rule_group_name    = "AWSManagedRulesBotControlRuleSet"
+#       vendor_name                = "AWS"
+#       cloudwatch_metrics_enabled = true
+#       metric_name                = "AWS-AWSManagedRulesBotControlRuleSet"
+#       sampled_requests_enabled   = true
+#     }
+#   ]
+# }
