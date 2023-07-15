@@ -302,12 +302,12 @@ public_ip=$(aws ec2 describe-network-interfaces --filters Name=addresses.private
 echo "Public IP is: $public_ip"
 
 # Update DNS record for domain
-update_response=$(aws route53 change-resource-record-sets --hosted-zone-id ${CONTAINER_DNS_ZONE} --change-batch "{  \"Comment\": \"Update wordpress endpoint with public IP\",  \"Changes\": [    {      \"Action\": \"UPSERT\",      \"ResourceRecordSet\": {        \"Name\": \"${CONTAINER_DNS}\",        \"Type\": \"A\",        \"TTL\": "60",        \"ResourceRecords\": [          {            \"Value\": \"${public_ip}\"          }        ]      }    }  ]}" --region $WPSTATIC_REGION)
-echo "$update_response"
+# update_response=$(aws route53 change-resource-record-sets --hosted-zone-id ${CONTAINER_DNS_ZONE} --change-batch "{  \"Comment\": \"Update wordpress endpoint with public IP\",  \"Changes\": [    {      \"Action\": \"UPSERT\",      \"ResourceRecordSet\": {        \"Name\": \"${CONTAINER_DNS}\",        \"Type\": \"A\",        \"TTL\": "60",        \"ResourceRecords\": [          {            \"Value\": \"${public_ip}\"          }        ]      }    }  ]}" --region $WPSTATIC_REGION)
+# echo "$update_response"
 
 # Check if first time launch and install basic site if so
 if ! sudo -u www-data wp core is-installed; then
-	sudo -u www-data wp core install --url=http://${CONTAINER_DNS} --title=Wordpress --admin_user=${WORDPRESS_ADMIN_USER} --admin_password=${WORDPRESS_ADMIN_PASSWORD} --admin_email=${WORDPRESS_ADMIN_EMAIL} --skip-email
+	sudo -u www-data wp core install --url=http://$public_ip --title=Wordpress --admin_user=${WORDPRESS_ADMIN_USER} --admin_password=${WORDPRESS_ADMIN_PASSWORD} --admin_email=${WORDPRESS_ADMIN_EMAIL} --skip-email
 fi
 # List installed plugins to log
 echo "$(sudo -u www-data wp plugin list)"
@@ -319,8 +319,8 @@ if ! sudo -u www-data wp plugin is-installed wp2static-addon-s3; then
 	sudo -u www-data wp plugin install /tmp/serverless-wordpress-s3-addon.zip --activate --path=/var/www/html || true
 fi
 # # Update Wordpress options with IP of running container
-sudo -u www-data wp option update siteurl "http://${CONTAINER_DNS}" || true
-sudo -u www-data wp option update home "http://${CONTAINER_DNS}" || true
+sudo -u www-data wp option update siteurl "http://$public_ip" || true
+sudo -u www-data wp option update home "http://$public_ip" || true
 
 # If environment variables for S3 static output is set, populate it in the plugin
 if [ "${WPSTATIC_DEST-}" ]; then
