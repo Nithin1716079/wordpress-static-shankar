@@ -119,7 +119,7 @@ resource "aws_ecs_task_definition" "wordpress_container" {
     efs_source_volume        = "${var.site_name}_wordpress_persistent"
     wordpress_admin_user     = var.wordpress_admin_user
     wordpress_admin_password = var.wordpress_admin_password
-    wordpress_admin_email    = yobitelcommunication@gmail.com
+    wordpress_admin_email    = var.wordpress_admin_email
     site_name                = var.site_name
   })
 
