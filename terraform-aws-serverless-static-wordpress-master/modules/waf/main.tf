@@ -1,4 +1,4 @@
-resource "aws_wafv2_web_acl" "default" {
+/* resource "aws_wafv2_web_acl" "default" {
   provider    = aws.ue1
   name        = "${var.site_name}-WAF"
   description = "${var.site_name} WAF"
@@ -36,3 +36,4 @@ resource "aws_wafv2_web_acl" "default" {
     }
   }
 }
+*/
