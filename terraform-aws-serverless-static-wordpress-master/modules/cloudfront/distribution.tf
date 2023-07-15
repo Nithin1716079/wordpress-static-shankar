@@ -41,7 +41,7 @@ resource "aws_cloudfront_distribution" "wordpress_distribution" {
   is_ipv6_enabled     = true
   comment             = "${var.site_name} Distribution for Wordpress"
   default_root_object = "index.html"
-  web_acl_id          = var.waf_acl_arn
+  #web_acl_id          = var.waf_acl_arn
 
   aliases = var.cloudfront_aliases
 
