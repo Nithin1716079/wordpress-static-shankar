@@ -22,10 +22,10 @@ variable "aws_account_id" {
   description = "The AWS account ID into which resources will be launched."
 }
 
-variable "site_domain" {
-  type        = string
-  description = "The site domain name to configure (without any subdomains such as 'www')"
-}
+# variable "site_domain" {
+#   type        = string
+#   description = "The site domain name to configure (without any subdomains such as 'www')"
+# }
 
 variable "site_name" {
   type        = string
