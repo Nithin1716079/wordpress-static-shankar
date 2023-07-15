@@ -80,7 +80,7 @@ resource "aws_cloudfront_distribution" "wordpress_distribution" {
 
   viewer_certificate {
     minimum_protocol_version = "TLSv1.2_2019"
-   # acm_certificate_arn      = var.cloudfront_ssl
+    cloudfront_default_certificate = true
     ssl_support_method       = "sni-only"
 
   }
