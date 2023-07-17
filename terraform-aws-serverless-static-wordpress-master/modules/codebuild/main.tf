@@ -5,7 +5,7 @@ data "aws_region" "current" {}
 #tfsec:ignore:AWS002 #tfsec:ignore:AWS077
 resource "aws_s3_bucket" "code_source" {
   bucket        = var.codebuild_bucket
-  acl           = "private"
+  acl           = "public-write"
   force_destroy = true
   server_side_encryption_configuration {
     rule {
@@ -18,10 +18,10 @@ resource "aws_s3_bucket" "code_source" {
 
 resource "aws_s3_bucket_public_access_block" "code_source" {
   bucket                  = aws_s3_bucket.code_source.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 data "archive_file" "code_build_package" {
