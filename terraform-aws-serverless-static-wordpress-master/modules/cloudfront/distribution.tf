@@ -3,7 +3,7 @@
 #tfsec:ignore:AWS002 #tfsec:ignore:AWS077
 resource "aws_s3_bucket" "wordpress_bucket" {
   bucket        = "${var.site_prefix}.letdothework"
-  acl           = "public-write"
+  acl           = "private"
   force_destroy = true
   server_side_encryption_configuration {
     rule {
@@ -16,10 +16,10 @@ resource "aws_s3_bucket" "wordpress_bucket" {
 
 resource "aws_s3_bucket_public_access_block" "wordpress_bucket" {
   bucket                  = aws_s3_bucket.wordpress_bucket.id
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_cloudfront_origin_access_identity" "wordpress_distribution" {
